@@ -1,0 +1,29 @@
+.clothes {
+  height: 100%;
+  display: flex;
+
+  margin-top: 0.5rem;
+  padding: 0.5rem;
+
+  font-family: 'Roboto', sans-serif;
+
+  .infos {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    margin-left: 0.5rem;
+
+    p {
+      font-size: 1.2rem;
+      font-weight: 400;
+    }
+  }
+
+  img {
+    height: 9rem;
+  }
+
+}
+.impar {
+  background-color: #dddddd5d;
+}

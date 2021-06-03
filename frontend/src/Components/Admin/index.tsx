@@ -5,11 +5,11 @@ import './styles.scss'
 
 export default function Admin() {
   return (
-    <div>
+    <>
       <header className="headadmin">
         <a href="adminluss"><img src={luss} alt="Luss" /></a>
         <h1>Painel do Admin Luss</h1>
-        <div className="btns">
+        <div className="buttons">
          <a href="#estoque">Estoque</a>
          <a href="#pedidos">Pedidos</a>
         </div>
@@ -20,6 +20,6 @@ export default function Admin() {
         </div>
       </div>
 
-    </div>
+    </>
   )
 }
