@@ -1,7 +1,6 @@
 import { Document } from 'mongoose'
 
 export default interface clothing  extends Document {
-  id: string;
   name: string;
   image: string;
   description: string;
