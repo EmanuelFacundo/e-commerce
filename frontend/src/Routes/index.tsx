@@ -8,7 +8,7 @@ export default function Routes() {
   return(
     <BrowserRouter>
       <Switch>
-        <Route path="/adminluss" exact component={Admin} />
+        <Route path="/" exact component={Admin} /> {/* /adminluss */}
       </Switch>
     </BrowserRouter>
   )  

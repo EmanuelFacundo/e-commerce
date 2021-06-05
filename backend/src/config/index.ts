@@ -14,7 +14,7 @@ const MONGO_OPTIONS = {
 
 const MONGO_USERNAME = process.env.MONGO_USERNAME || 'superuser';
 const MONGO_PASSWORD = process.env.MONGO_USERNAME || 'supersecretpassword1';
-const MONGO_HOST = process.env.MONGO_URL || `localhost:27017/mongoteste`;
+const MONGO_HOST = process.env.MONGO_URL || `localhost:27017/lussdb`;
 
 const MONGO = {
   host: MONGO_HOST,
