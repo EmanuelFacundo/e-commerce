@@ -2,6 +2,7 @@ import { actionStockType, collectionsType } from './types';
 
 const INITIAL_STATE = {
   collections: [{
+    _id: '',
     name: '',
     date: '',
     clothes: [{

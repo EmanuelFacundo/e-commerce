@@ -1,27 +1,76 @@
 .estoque {
   height: 100vh;
 
-  font-family: 'Cabin', sans-serif;
+  font-family: "Cabin", sans-serif;
 
   margin-top: 2rem;
   padding-left: 2rem;
 
-  .title{
-    display: flex;
-    flex-direction: column;
+  .menu {
+    width: 100%;
+    height: 4rem;
 
-    h1 {
-      font-size: 2.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    .title {
+      display: flex;
+      flex-direction: column;
+
+      h1 {
+        font-size: 2.5rem;
+      }
+      span {
+        margin-top: 0.5rem;
+        width: 12rem;
+        height: 0.25rem;
+
+        background-color: #deb887;
+      }
     }
-    span {
-      margin-top: 0.5rem;
-      width: 12rem;
-      height: 0.25rem;
-  
-      background-color: #deb887;
+
+    .buttons {
+      width: 20%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      button {
+        font-family: "Roboto", sans-serif !important;
+
+        width: 100%;
+        height: 2.5rem;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        padding: 0.25rem;
+        margin-right: 1rem;
+
+        font-size: 0.85rem;
+        font-weight: 600;
+        letter-spacing: 0.025rem;
+
+        background-color: #FFDEAD;
+
+        border: none;
+        border-radius: 0.5rem;
+        cursor: pointer;
+
+        img {
+          height: 1.5rem;
+          margin-left: 0.5rem;
+        }
+
+        &:hover {
+          background-color: #ffdeadb6;
+        }
+      }
     }
   }
-  
 
   .collections {
     margin-top: 1rem;
@@ -34,12 +83,9 @@
         margin-top: 0.5rem;
         width: 10rem;
         height: 0.25rem;
-    
+
         background-color: #deb887;
       }
     }
-
-
   }
-
 }

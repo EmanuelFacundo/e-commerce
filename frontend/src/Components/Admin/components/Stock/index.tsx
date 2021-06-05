@@ -6,6 +6,8 @@ import { showCollections } from './reducerStock/action'
 import { collectionsType } from './reducerStock/types'
 
 import Clothes from "../Clothes";
+import blusa from "../../static/blusa.webp"
+import arara from "../../static/arara.webp"
 
 import './styles.scss'
 
@@ -17,7 +19,7 @@ class Stock extends React.Component<statePropsType, collectionsType> {
 
   render() {
 
-    console.log(this.props.stock?.collections)
+    console.log(this.props.stock)
     return (
       <div className="estoque">
         <div className="menu">
@@ -25,8 +27,9 @@ class Stock extends React.Component<statePropsType, collectionsType> {
             <h1>Estoque</h1>
             <span />
           </div>
-          <div className="btns">
-            
+          <div className="buttons">
+            <button>Nova Coleção <img src={arara} /> </button>
+            <button> <p>Nova Peça <br/> Sem Coleção </p>  <img src={blusa} /></button>
           </div>
         </div>
   
