@@ -1,8 +1,9 @@
 import { Document } from 'mongoose'
+import image from './image';
 
 export default interface clothing  extends Document {
   name: string;
-  image: string;
+  image: Array<image>;
   description: string;
   color: string;
   type: string;
