@@ -21,7 +21,7 @@ const storageTypes = {
   }),
   s3: multerS3({
     s3: new aws.S3(), // Já reconhece as variáveis de ambientes 
-    bucket: 'testimages-upload', // nome do bucket
+    bucket: process.env.AWS_BUCKET, // nome do bucket
     contentType: multerS3.AUTO_CONTENT_TYPE, // Definido pra não fazer o Download automático, basicamente mostrando o tipo do arquivo para o navegador
     acl: 'public-read', // Para todo mundo visualizar os arquivos
     key: (req, file, cb) => {

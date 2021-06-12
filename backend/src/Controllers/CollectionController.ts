@@ -1,4 +1,7 @@
-import { NextFunction, Request, Response } from "express";
+import aws from 'aws-sdk'
+import fs from 'fs'
+import path from 'path'
+import { Request, Response } from "express";
 import collections from "../Models/collection";
 
 class CollectionController {
@@ -102,11 +105,10 @@ class CollectionController {
       } = JSON.parse(req.body.body)
 
       req.files.map(file => {
-        console.log(file)
         const image = {
           name: file.originalname,
           size: file.size,
-          key: file.key,
+          key: file.key ? file.key : file.filename,
           url: file.location || `${process.env.APP_URL}/files/${file.filename}`,
         }
         clothing.image.push(image)
@@ -135,8 +137,30 @@ class CollectionController {
       const { idClothing, idCollection } = req.body
 
       let collection = await collections.findById(idCollection)
-      
-      collection.clothes = collection.clothes.filter(clothing => clothing._id != idClothing )
+
+      collection.clothes = collection.clothes.filter(clothing => {
+        if (clothing._id == idClothing) {
+          clothing.image.filter(image => {
+            if (process.env.STORAGE_TYPE == "s3") {
+              const s3 = new aws.S3()
+              s3.deleteObject({
+                Bucket: process.env.AWS_BUCKET,
+                Key: image.key.toString()
+              }).promise()
+            } else {
+              fs.unlink(
+                path.resolve(__dirname, "..", "..", "tmp", "uploads", image.key.toString()),
+                () => { }
+              )
+            }
+
+          })
+
+
+        } else {
+          return clothing
+        }
+      })
 
       await collections.updateOne({ _id: idCollection }, { clothes: collection.clothes })
 
