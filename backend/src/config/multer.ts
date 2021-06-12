@@ -1,10 +1,11 @@
 import multer from "multer"
 import path from "path"
 import crypto from "crypto"
+import multerS3 from "multer-s3"
+import aws from "aws-sdk"
 
-export default {
-  dest: path.resolve(__dirname, "..", "..", "tmp", "uploads"),
-  storage: multer.diskStorage({
+const storageTypes = {
+  local: multer.diskStorage({
     destination: (req, file, cb) => {
       cb(null, path.resolve(__dirname, "..", "..", "tmp", "uploads"))
     }, 
@@ -18,6 +19,26 @@ export default {
       })
     }
   }),
+  s3: multerS3({
+    s3: new aws.S3(), // Já reconhece as variáveis de ambientes 
+    bucket: 'testimages-upload', // nome do bucket
+    contentType: multerS3.AUTO_CONTENT_TYPE, // Definido pra não fazer o Download automático, basicamente mostrando o tipo do arquivo para o navegador
+    acl: 'public-read', // Para todo mundo visualizar os arquivos
+    key: (req, file, cb) => {
+      crypto.randomBytes(16, (err, hash) => {
+        if (err) cb(err, err.message)
+
+        file.key = `${hash.toString('hex')}-${file.originalname}`
+
+        cb(null, file.key)
+      })
+    }
+  })
+}
+
+export default {
+  dest: path.resolve(__dirname, "..", "..", "tmp", "uploads"),
+  storage: storageTypes.s3,
   limits: {
     fileSize: 20 * 1024 * 1024,
   },

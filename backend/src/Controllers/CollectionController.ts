@@ -95,6 +95,40 @@ class CollectionController {
     }
   }
 
+  async updateClothes(req, res: Response) {
+
+    try {
+      const {
+        idCollection,
+        clothing
+      } = JSON.parse(req.body.body)
+
+      const { originalname, size, key, location = "" } = req.file
+
+      const image = {
+        name: originalname,
+        size,
+        key,
+        url: location || '',
+      }
+      clothing.image.push(image)
+      console.log(req.file)
+      return res.status(200).json({
+        clothing,
+        idCollection
+      })
+
+    } catch (error) {
+      return res.status(200).json({
+        message: error.message,
+        error
+      })
+      
+    }
+      
+
+  }
+
 }
 
 export { CollectionController }
