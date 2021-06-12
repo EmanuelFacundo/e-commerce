@@ -1,3 +1,4 @@
+import path from 'path';
 import http from 'http'
 import express from 'express'
 import morgan from 'morgan'
@@ -6,8 +7,9 @@ import mongoose from 'mongoose'
 import dotenv from 'dotenv'
 
 import config from './config'
-import userRouter  from './Routes/UsersRoutes'
+import userRouter from './Routes/UsersRoutes'
 import collectionRouter from './Routes/CollectionRoutes'
+import process from 'process';
 
 dotenv.config()
 
@@ -29,9 +31,12 @@ app.use(cors())
 
 app.use('/users', userRouter)
 app.use('/collection', collectionRouter)
+app.use('/files', 
+  express.static(path.resolve(__dirname, "..", "tmp", "uploads"))
+)
 
 const httpServer = http.createServer(app)
 
-httpServer.listen(4004, () => {
-  console.log(`Server is online at port: ${4004}`)
+httpServer.listen(process.env.APP_PORT, () => {
+  console.log(`Server is online at port: ${process.env.APP_PORT}`)
 })

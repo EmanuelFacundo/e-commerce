@@ -102,11 +102,12 @@ class CollectionController {
       } = JSON.parse(req.body.body)
 
       req.files.map(file => {
+        console.log(file)
         const image = {
           name: file.originalname,
           size: file.size,
           key: file.key,
-          url: file.location || '',
+          url: file.location || `${process.env.APP_URL}/files/${file.filename}`,
         }
         clothing.image.push(image)
       })
@@ -126,6 +127,27 @@ class CollectionController {
       })
     }
 
+  }
+
+  async deleteClothing(req: Request, res: Response) {
+
+    try {
+      const { idClothing, idCollection } = req.body
+
+      let collection = await collections.findById(idCollection)
+      
+      collection.clothes = collection.clothes.filter(clothing => clothing._id != idClothing )
+
+      await collections.updateOne({ _id: idCollection }, { clothes: collection.clothes })
+
+      return res.status(200).json({
+        message: "Roupa removida com sucesso!"
+      })
+    } catch (error) {
+      return res.status(500).json({
+        message: error.message
+      })
+    }
   }
 
 }
