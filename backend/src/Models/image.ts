@@ -1,7 +1,7 @@
 import { Schema } from 'mongoose';
 
 
-const image = new Schema({
+const image:Schema = new Schema({
   name: { type: String, required: true },
   size: { type: Number, required: true },
   key: { type: String, required: true },
