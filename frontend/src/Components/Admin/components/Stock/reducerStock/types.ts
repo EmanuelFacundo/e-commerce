@@ -16,10 +16,18 @@ export type collectionType = {
 
 export type clothingType = {
   name: string;
-  image: string;
+  images: Array<image>;
   description: string;
   color: string;
   type: string;
   amount: number;
   size: string;
+}
+
+export type image = {
+  name: string;
+  size: number;
+  key: string;
+  url: string;
+  createdAt: string;
 }

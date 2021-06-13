@@ -7,7 +7,13 @@ const INITIAL_STATE = {
     date: '',
     clothes: [{
       name: '',
-      image: '',
+      images: [{
+        name: '',
+        size: 0,
+        key: '',
+        url: '',
+        createdAt: '',
+      }],
       description: '',
       color: '',
       type: '',
