@@ -4,7 +4,7 @@ import image from './image';
 
 export const clothingSchema: Schema = new Schema({
   name: { type: String, required: true },
-  image: { type: [image], required: true },
+  images: { type: [image], required: true },
   description: { type: String, required: true },
   color: { type: String, required: true },
   type: { type: String, required: true },

@@ -1,11 +1,12 @@
 import React from 'react'
-import { AnyAction, bindActionCreators , Dispatch } from 'redux'
+import { AnyAction, bindActionCreators, Dispatch } from 'redux'
 import { connect } from 'react-redux'
+
+import Collection from '../Collection'
 
 import { showCollections } from './reducerStock/action'
 import { collectionsType } from './reducerStock/types'
 
-import Clothes from "../Clothes";
 import blusa from "../../static/blusa.webp"
 import arara from "../../static/arara.webp"
 
@@ -17,9 +18,19 @@ class Stock extends React.Component<statePropsType, collectionsType> {
     this.props.showCollections()
   }
 
+  renderCollections() {
+    return this.props.stock?.collections.map((collection, index) => {
+      return (
+        <section key={index}>
+          <Collection collection={collection} />
+        </section>
+      )
+    })
+  }
+
   render() {
 
-    console.log(this.props.stock)
+    console.log(this.props.stock?.collections)
     return (
       <div className="estoque">
         <div className="menu">
@@ -28,18 +39,12 @@ class Stock extends React.Component<statePropsType, collectionsType> {
             <span />
           </div>
           <div className="buttons">
-            <button>Nova Coleção <img src={arara} /> </button>
-            <button> <p>Nova Peça <br/> Sem Coleção </p>  <img src={blusa} /></button>
+            <button>Nova Coleção <img src={arara} alt="arara" /> </button>
+            <button> <p>Nova Peça <br /> Sem Coleção </p>  <img src={blusa} alt="blusa" /> </button>
           </div>
         </div>
-  
-        <div className="collections">
-          <div className="title2">
-            <h2>Coleção teste</h2>
-            <span />
-          </div>
-          <Clothes />
-        </div>
+
+        {this.renderCollections()}
       </div>
     )
   }
@@ -50,7 +55,7 @@ type statePropsType = {
   showCollections: () => (dispatch: Dispatch<AnyAction>) => void;
 }
 
-const mapStateToProps = (state:statePropsType) => ({
+const mapStateToProps = (state: statePropsType) => ({
   stock: state.stock
 })
 
@@ -58,4 +63,4 @@ const mapDispatchToProps = (dispatch: Dispatch<AnyAction>) => bindActionCreators
   showCollections
 }, dispatch)
 
-export default connect(mapStateToProps,mapDispatchToProps)(Stock)
+export default connect(mapStateToProps, mapDispatchToProps)(Stock)

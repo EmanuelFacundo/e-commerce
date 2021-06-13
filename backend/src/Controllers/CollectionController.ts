@@ -111,7 +111,7 @@ class CollectionController {
           key: file.key ? file.key : file.filename,
           url: file.location || `${process.env.APP_URL}/files/${file.filename}`,
         }
-        clothing.image.push(image)
+        clothing.images.push(image)
       })
 
       const collection = await collections.findById(idCollection)
@@ -140,7 +140,7 @@ class CollectionController {
 
       collection.clothes = collection.clothes.filter(clothing => {
         if (clothing._id == idClothing) {
-          clothing.image.filter(image => {
+          clothing.images.filter(image => {
             if (process.env.STORAGE_TYPE == "s3") {
               const s3 = new aws.S3()
               s3.deleteObject({
