@@ -1,5 +1,4 @@
 import { clothingType } from '../Stock/reducerStock/types';
-import blusaTeste from './blusaTeste.jpg'
 
 import './styles.scss';
 
@@ -15,26 +14,22 @@ export default function Clothes(props: propsClothes) {
       return (
         <div key={index} className={`clothes ${index % 2 === 0 ?
           'par' : 'impar'}`}>
-          {/* <img src={clothing.images[0].url} alt="" /> */}
-
-
+          <img src={clothing.images[0].url} alt={clothing.images[0].name} />
+          <div className="infos">
+            <h1>{clothing.name}</h1>
+            <p>Cor: {clothing.color}</p>
+            <p>Tipo: {clothing.type}</p>
+            <p>Quantidade {clothing.amount}</p>
+          </div>
         </div>
       )
     })
   }
 
-  return (
-    <div className="clothes impar">
-      <img src={blusaTeste} alt="blusa" />
-      <div className="infos">
-        <h1>Blusa simples</h1>
-        <p>Cor: branca</p>
-        <p>Tipo: blusa</p>
-        <p>Quantidade: 3</p>
-      </div>
-      <div className="buttons">
+  return props.clothes[0].name === '' ? <h1>Carregando...</h1> :
+    (
+      <div>
         {renderClothing()}
       </div>
-    </div>
-  )
+    )
 }
