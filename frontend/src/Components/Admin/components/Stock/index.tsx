@@ -24,7 +24,7 @@ class Stock extends React.Component<statePropsType, collectionsType> {
 
     this.handlerNewCollection = this.handlerNewCollection.bind(this)
     this.onChangeNewCollection = this.onChangeNewCollection.bind(this)
-    this.handlerAddNewCollection= this.handlerAddNewCollection.bind(this)
+    this.handlerAddNewCollection = this.handlerAddNewCollection.bind(this)
   }
   componentDidMount() {
     this.props.showCollections()
@@ -48,7 +48,7 @@ class Stock extends React.Component<statePropsType, collectionsType> {
     this.newCollection.name = name;
   }
 
-  handlerAddNewCollection(){
+  handlerAddNewCollection() {
     this.props.addCollection(this.newCollection)
     this.newCollection.name = ''
     this.newC = !this.newC
@@ -76,11 +76,14 @@ class Stock extends React.Component<statePropsType, collectionsType> {
         </div>
         {this.newC ?
           <div className="newCollection">
-            <input
-              type="text"
-              placeholder="Nome da coleção..."
-              onChange={(e) => this.onChangeNewCollection(e.target.value)}
-            />
+            <div className="input">
+              <input
+                type="text"
+                placeholder="Nova coleção..."
+                onChange={(e) => this.onChangeNewCollection(e.target.value)}
+              />
+              <span />
+            </div>
             <button onClick={() => this.handlerAddNewCollection()}>
               Adicionar
             </button>

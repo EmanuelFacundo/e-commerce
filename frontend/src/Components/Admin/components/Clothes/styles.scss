@@ -1,29 +1,169 @@
 .clothes {
-  height: 100%;
   display: flex;
-
+  align-items: center;
+  
+  margin-right: 1rem;
   margin-top: 0.5rem;
-  padding: 0.5rem;
 
-  font-family: 'Roboto', sans-serif;
-
-  .infos {
+  
+  .clothing {
+    width: 33%;
+    height: 100%;
     display: flex;
-    flex-direction: column;
-    justify-content: space-evenly;
-    margin-left: 0.5rem;
-
-    p {
-      font-size: 1.2rem;
-      font-weight: 400;
+  
+    padding: 0.5rem;
+    margin-right: 1rem;
+  
+    font-family: 'Roboto', sans-serif;
+  
+    .infos {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-evenly;
+      margin-left: 0.5rem;
+  
+      p {
+        font-size: 1.2rem;
+        font-weight: 400;
+      }
     }
+  
+    img {
+      height: 9rem;
+    }
+  
   }
-
-  img {
-    height: 9rem;
-  }
-
 }
+
+.par {
+  background-color: transparent;
+}
+
 .impar {
   background-color: #dddddd5d;
+}
+
+.addClothing{
+  width: 33%;
+  height: 10rem;
+
+  button {
+    width: 100%;
+    height: 100%;
+
+    font-size: 2rem;
+    
+    border: 0.2rem solid;
+    border-radius: 0.25rem;
+    border-color: #FFDEAD;
+
+    background-color: transparent;
+    color: #00FA9A;
+
+    cursor: pointer;
+
+    &:hover {
+      background-color: #dddddd4b;
+    }
+  }
+}
+
+.newClothing {
+  width: 100%;
+  height: 100%;
+
+  display: flex;
+  align-items: center;
+
+  background-color: #32cd322d;
+
+  
+  .dropImage {
+    width: 25%;
+    height: 95%;
+
+    border-radius: 0.25rem;
+    
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    margin: 0.25rem;
+
+    font-size: 3rem;
+
+    background: #cccccc8e;
+  }
+
+  .news {
+    width: 40%;
+    height: 100%;
+
+    display: flex;
+    flex-direction: column;
+    
+    .name {
+      width: 100%;
+      height: 1.2rem;
+
+      font-weight: 500;
+      letter-spacing: 0.055rem;
+      margin-top: 0.25rem;
+      margin-left: 0;
+    }
+    .number {
+      width: 3rem;
+    }
+
+    p{
+      display: flex;
+      align-items: center;
+      margin-top: 0.5rem;
+    }
+    
+    input {
+      width: 100%;
+      height: 1.5rem;
+
+      margin-left: 0.25rem;
+      
+      font-size: 1rem;
+      font-family: "Cabin", sans-serif;
+
+      background-color: transparent;  
+      border: none;
+      border-bottom: 0.15rem solid #deb887;
+      
+
+      
+      &:focus {
+        background-color: #cccccc8e;
+        outline: none;
+      }
+    }
+
+  }
+
+  .buttons {
+    width: 35%;
+    height: 100%;
+
+    margin-left: 1rem;
+    margin-right: 0.25rem;
+    .add {
+      height: 45%;
+      margin-top: 0.25rem;
+      margin-bottom: 0.5rem;
+
+      border-color: #deb887;
+    }
+    
+    .closed{
+      height: 45%;
+      margin-bottom: 0.25rem;
+
+      border-color: #deb887;
+      color: #FF4500;
+    }
+}
 }
