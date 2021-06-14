@@ -10,7 +10,6 @@ export default function Clothes(props: propsClothes) {
 
   const renderClothing = () => {
     return props.clothes.map((clothing, index) => {
-      console.log(clothing.images)
       return (
         <div key={index} className={`clothes ${index % 2 === 0 ?
           'par' : 'impar'}`}>
@@ -26,7 +25,7 @@ export default function Clothes(props: propsClothes) {
     })
   }
 
-  return props.clothes[0].name === '' ? <h1>Carregando...</h1> :
+  return props.clothes[0]?.name === '' ? <h1>Carregando...</h1> :
     (
       <div>
         {renderClothing()}

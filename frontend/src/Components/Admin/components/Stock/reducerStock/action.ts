@@ -19,3 +19,18 @@ export function showCollections(){
       })
   }
 }
+
+export function addCollection(collection: {name: string}){
+  return (dispatch:Dispatch<AnyAction>) => {
+    Axios.post(`${DB}/collection/createCollection`, collection)
+      .then(resp => {
+        dispatch({
+          type: 'ADD_COLLECTION',
+          payload: resp.data
+        })
+      })
+      .catch(err => {
+        console.log(err.message)
+      })
+  }
+}
