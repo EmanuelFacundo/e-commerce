@@ -1,5 +1,7 @@
 import { faTrashAlt } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useState } from "react";
+import { useEffect } from "react";
 import { connect } from "react-redux";
 import { Dispatch, AnyAction, bindActionCreators } from "redux";
 
@@ -15,7 +17,11 @@ type propsCollection = {
 
 function Collection(props: propsCollection) {
 
-  const collection = props.collection
+  const {collection, deleteCollection, showCollections} = props
+  const [toggleDeleted, setToggleDeleted] = useState(false)
+  useEffect(() => {
+    showCollections()
+  },[toggleDeleted,showCollections]);
   return (
     <div className="collections">
       <div className="menuTitle2">
@@ -24,13 +30,13 @@ function Collection(props: propsCollection) {
           <span></span>
         </div>
         <button onClick={() => {
-          props.deleteCollection(collection._id)
-          props.showCollections()
+          setToggleDeleted(!toggleDeleted)
+          deleteCollection(collection._id)
         }}>
           <FontAwesomeIcon icon={faTrashAlt} />
         </button>
       </div>
-      <Clothes clothes={collection.clothes} />
+      <Clothes idCollection={collection._id} clothes={collection.clothes} />
     </div>
   )
 }

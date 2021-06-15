@@ -33,6 +33,11 @@ class Stock extends React.Component<statePropsType, collectionsType> {
 
   renderCollections() {
     return this.props.stock?.collections.map((collection, index) => {
+      if(index === 0 && collection.name === '') {
+        return (
+          <h1 key={index}>Carregando...</h1>
+        )
+      }
       return (
         <section key={index}>
           <Collection collection={collection} />
