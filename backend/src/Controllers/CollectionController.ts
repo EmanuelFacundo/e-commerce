@@ -39,10 +39,10 @@ class CollectionController {
   }
 
   async deleteById(req: Request, res: Response) {
-    const collection = req.body
+    const _id = req.body
 
     try {
-      await collections.remove({ _id: collection._id })
+      await collections.remove({ _id })
 
       return res.status(200).json({
         message: "Excluída com sucesso!"

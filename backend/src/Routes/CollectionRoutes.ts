@@ -9,7 +9,7 @@ const collectionController = new CollectionController()
 
 router.get('/showCollections', collectionController.showCollections)
 router.post('/createCollection', collectionController.createCollections)
-router.delete('/deleteCollection', collectionController.deleteById)
+router.put('/deleteCollection', collectionController.deleteById)
 router.put('/updateNameCollection', collectionController.updateNameById)
 router.put('/updateACBI', collectionController.updateACBI)
 router.put('/addClothing', multer(multerConfig).array("file"), collectionController.addClothing)

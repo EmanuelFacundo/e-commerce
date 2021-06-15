@@ -1,13 +1,14 @@
 import React from 'react'
 import { AnyAction, bindActionCreators, Dispatch } from 'redux'
 import { connect } from 'react-redux'
+import { faTshirt } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 import Collection from '../Collection'
 
 import { showCollections, addCollection } from './reducerStock/action'
 import { collectionsType } from './reducerStock/types'
 
-import blusa from "../../static/blusa.webp"
 import arara from "../../static/arara.webp"
 
 import './styles.scss'
@@ -70,7 +71,10 @@ class Stock extends React.Component<statePropsType, collectionsType> {
               <img src={arara} alt="arara" />
             </button>
             <button>
-              <p>Nova Peça <br /> Sem Coleção </p>  <img src={blusa} alt="blusa" />
+              <p>Nova Peça <br /> Sem Coleção </p>
+              <h2>
+                <FontAwesomeIcon icon={faTshirt} />
+              </h2>
             </button>
           </div>
         </div>

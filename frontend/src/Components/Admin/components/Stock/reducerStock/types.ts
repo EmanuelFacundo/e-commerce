@@ -8,7 +8,7 @@ export type collectionsType = {
 }
 
 export type collectionType = {
-  _id: String;
+  _id: string;
   name: string;
   date: string;
   clothes: Array<clothingType>

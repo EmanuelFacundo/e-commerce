@@ -15,7 +15,7 @@ export function showCollections(){
         })
       })
       .catch(err => {
-        console.log(err.message)
+        console.warn(err.message)
       })
   }
 }
@@ -30,7 +30,20 @@ export function addCollection(collection: {name: string}){
         })
       })
       .catch(err => {
-        console.log(err.message)
+        console.warn(err.message)
+      })
+  }
+}
+
+export function deleteCollection(_id: string) {
+  return (dispatch:Dispatch<AnyAction>) => {
+    Axios.put(`${DB}/collection/deleteCollection`, {_id})
+      .then(resp => dispatch({
+        type: 'DELETE_COLLECTION',
+        payload: resp.data
+      }))
+      .catch(err => {
+        console.warn(err.message)
       })
   }
 }
