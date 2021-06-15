@@ -1,50 +1,54 @@
 .clothes {
   display: flex;
   align-items: center;
-  
+  flex-wrap: wrap;
+
   margin-right: 1rem;
   margin-top: 0.5rem;
 
   
   .clothing {
-    width: 33%;
+    width: 30%;
     height: 100%;
     display: flex;
-  
+
+    border-radius: 0.25rem;
+    
     padding: 0.5rem;
     margin-right: 1rem;
-  
-    font-family: 'Roboto', sans-serif;
-  
+    margin-bottom: 0.5rem;
+
+    font-family: "Roboto", sans-serif;
+
     .infos {
       display: flex;
       flex-direction: column;
       justify-content: space-evenly;
       margin-left: 0.5rem;
-  
+
       p {
         font-size: 1.2rem;
         font-weight: 400;
       }
     }
-  
+
     img {
       height: 9rem;
     }
-  
   }
 }
 
 .par {
-  background-color: transparent;
+  border: 0.1rem solid #deb887;
 }
 
 .impar {
   background-color: #dddddd5d;
+  border: 0.1rem solid #deb887;
 }
 
-.addClothing{
-  width: 33%;
+.addClothing {
+  width: 31%;
   height: 10rem;
 
   button {
@@ -52,13 +56,13 @@
     height: 100%;
 
     font-size: 2rem;
-    
+
     border: 0.2rem solid;
     border-radius: 0.25rem;
-    border-color: #FFDEAD;
+    border-color: #ffdead;
 
     background-color: transparent;
-    color: #00FA9A;
+    color: #00fa9a;
 
     cursor: pointer;
 
@@ -77,22 +81,21 @@
 
   background-color: #32cd322d;
 
-  
-  .dropImage {
+  .upload {
     width: 25%;
-    height: 95%;
-
-    border-radius: 0.25rem;
-    
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    height: 90%;
 
     margin: 0.25rem;
 
-    font-size: 3rem;
-
-    background: #cccccc8e;
+    font-size: 2.5rem;
+    background-color: #ccccccb4;
+    
+    border-radius: 0.25rem;
+    border: 0.025rem dashed transparent;
+  }
+  
+  .uploaded {
+    background-color: #00CED1;
   }
 
   .news {
@@ -101,10 +104,10 @@
 
     display: flex;
     flex-direction: column;
-    
+
     .name {
       width: 100%;
-      height: 1.2rem;
+      height: 1.6rem;
 
       font-weight: 500;
       letter-spacing: 0.055rem;
@@ -112,36 +115,75 @@
       margin-left: 0;
     }
     .number {
-      width: 3rem;
+      width: 4rem;
     }
 
-    p{
+    p {
       display: flex;
       align-items: center;
       margin-top: 0.5rem;
-    }
-    
-    input {
-      width: 100%;
-      height: 1.5rem;
 
-      margin-left: 0.25rem;
-      
-      font-size: 1rem;
-      font-family: "Cabin", sans-serif;
+      button {
+        width: 3rem;
+        height: 1.5rem;
 
-      background-color: transparent;  
-      border: none;
-      border-bottom: 0.15rem solid #deb887;
-      
+        margin-left: 15%;
 
-      
-      &:focus {
-        background-color: #cccccc8e;
-        outline: none;
+        border: 0.15rem solid;
+        border-color: #deb887;
+
+        font-size: 1rem;
       }
     }
 
+    textarea {
+      margin-top: 0.25rem;
+      padding: 0.25rem;
+      background-color: transparent;
+      resize: none;
+      border: 0.15rem solid #deb887;
+      font-family: "Cabin", sans-serif;
+      &:focus {
+        background-color: #cccccc8e;
+        outline: none;
+        border-radius: 0.25rem;
+      }
+    }
+    button {
+      width: 3rem;
+      height: 1.5rem;
+
+      border: 0.15rem solid;
+      border-color: #deb887;
+
+      margin-top: 0.5rem;
+      margin-bottom: 0.25rem;
+
+      font-size: 1rem;
+    }
+
+    input {
+      width: 100%;
+      height: 1.2rem;
+
+      margin-left: 0.25rem;
+      padding-left: 0.2rem;
+
+      font-size: 1rem;
+      font-family: "Cabin", sans-serif;
+
+      background-color: transparent;
+      border: none;
+      border-bottom: 0.15rem solid #deb887;
+
+      transition: all 0.2s ease;
+
+      &:focus {
+        background-color: #cccccc8e;
+        outline: none;
+        border-radius: 0.25rem;
+      }
+    }
   }
 
   .buttons {
@@ -156,14 +198,20 @@
       margin-bottom: 0.5rem;
 
       border-color: #deb887;
+
+      &:disabled {
+        cursor: default;
+        background-color: #5555553a;
+        color: #006400;
+      }
     }
-    
-    .closed{
+
+    .closed {
       height: 45%;
       margin-bottom: 0.25rem;
 
       border-color: #deb887;
-      color: #FF4500;
+      color: #ff4500;
     }
-}
+  }
 }
