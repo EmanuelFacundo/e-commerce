@@ -56,11 +56,10 @@ export function addClothing(form: FormData) {
     Axios.put(`${DB}/collection/addClothing`, form)
       .then(resp => {
         dispatch({
-          type: 'ADD_CLOTHING',
+          type: 'SHOW_COLLECTIONS',
           payload: resp.data
         })
         alert("Roupa Adicionada com sucesso!")
-        // location.reload()
       })
       .catch(err => {
         alert(err.message)

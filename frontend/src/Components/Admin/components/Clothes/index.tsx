@@ -3,20 +3,18 @@ import { faAngleDoubleLeft, faAngleDoubleRight, faPlus, faTimes } from '@fortawe
 import { useState } from 'react';
 import { Dispatch, AnyAction, bindActionCreators } from 'redux';
 
-import { addClothing, showCollections } from '../Stock/reducerStock/action';
+import { addClothing } from '../Stock/reducerStock/action';
 import { clothingType } from '../Stock/reducerStock/types';
 
 
 import './styles.scss';
 import Upload from '../Upload';
 import { connect } from 'react-redux';
-import { useEffect } from 'react';
 
 type propsClothes = {
   idCollection?: string;
   clothes: Array<clothingType>;
   addClothing: (form: FormData) => (dispatch: Dispatch<AnyAction>) => void;
-  showCollections: () => (dispatch: Dispatch<AnyAction>) => void;
 }
 
 function Clothes(props: propsClothes) {
@@ -55,13 +53,6 @@ function Clothes(props: propsClothes) {
     type !== '' && amount !== 0 && size !== '' && disabledAdd) {
     setDisabledAdd(!disabledAdd)
   }
-
-  const showCollections = props.showCollections
-
-  useEffect(() => {
-    showCollections()
-    return
-  }, [reset, showCollections])
 
   const handlerUpload = (files: File[]) => {
     uploadedImages = files
@@ -228,8 +219,7 @@ function Clothes(props: propsClothes) {
 }
 
 const mapDispatchToProps = (dispatch: Dispatch<AnyAction>) => bindActionCreators({
-  addClothing,
-  showCollections
+  addClothing
 }, dispatch)
 
 export default connect(null, mapDispatchToProps)(Clothes)

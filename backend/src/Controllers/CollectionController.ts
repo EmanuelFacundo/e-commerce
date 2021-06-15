@@ -118,9 +118,15 @@ class CollectionController {
       collection.clothes.push(clothing)
       await collections.updateOne({ _id: idCollection }, { clothes: collection.clothes })
 
-      return res.status(200).json({
-        message: "Roupa adicionada com sucesso!"
-      })
+      collections.find()
+        .exec()
+        .then(collection => {
+          console.log(collection)
+          return res.status(200).json({
+            collections: collection
+          })
+        })
+
 
     } catch (error) {
       return res.status(500).json({
