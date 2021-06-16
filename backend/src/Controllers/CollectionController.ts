@@ -42,11 +42,40 @@ class CollectionController {
     const _id = req.body
 
     try {
-      await collections.remove({ _id })
+      const collection = await collections.findById(_id)
 
-      return res.status(200).json({
-        message: "Excluída com sucesso!"
+      collection?.clothes.filter(clothing => { // Deleting all images
+        clothing?.images.filter(image => {
+          if (process.env.STORAGE_TYPE == "s3") {
+            const s3 = new aws.S3()
+            s3.deleteObject({
+              Bucket: process.env.AWS_BUCKET,
+              Key: image.key.toString()
+            }).promise()
+          } else {
+            fs.unlink(
+              path.resolve(__dirname, "..", "..", "tmp", "uploads", image.key.toString()),
+              () => { }
+            )
+          }
+        })
       })
+
+
+      await collections.remove({ _id })
+        .then(_ => {
+          return res.status(200).json({
+            message: "Excluída com sucesso!",
+            collections
+          })
+        })
+        .catch(err => {
+          return res.status(500).json({
+            message: err.message,
+            err
+          })
+        })
+
     } catch (err) {
       return res.status(500).json({
         message: err.message,
@@ -121,7 +150,6 @@ class CollectionController {
       collections.find()
         .exec()
         .then(collection => {
-          console.log(collection)
           return res.status(200).json({
             collections: collection
           })
