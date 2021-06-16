@@ -67,4 +67,19 @@ export function addClothing(form: FormData) {
   }
 }
 
-// export function deleteClothing
+export function deleteClothing(idC: string, idc: string) {
+  
+  return (dispatch: Dispatch<AnyAction>) => {
+    Axios.delete(`${DB}/collection/deleteClothing?idC=${idC}&idc=${idc}`)
+      .then(resp => {
+        dispatch({
+          type: 'SHOW_COLLECTIONS',
+          payload: resp.data
+        })
+        alert(resp.data.message)
+      })
+      .catch(err => {
+        alert(err.message)
+      })
+  }
+}

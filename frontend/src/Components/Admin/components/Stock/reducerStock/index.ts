@@ -6,6 +6,7 @@ const INITIAL_STATE = {
     name: '',
     date: '',
     clothes: [{
+      _id: '',
       name: '',
       images: [{
         name: '',

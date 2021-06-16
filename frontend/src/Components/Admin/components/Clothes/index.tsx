@@ -3,18 +3,20 @@ import { faAngleDoubleLeft, faAngleDoubleRight, faPlus, faTimes } from '@fortawe
 import { useState } from 'react';
 import { Dispatch, AnyAction, bindActionCreators } from 'redux';
 
-import { addClothing } from '../Stock/reducerStock/action';
+import { addClothing, deleteClothing } from '../Stock/reducerStock/action';
 import { clothingType } from '../Stock/reducerStock/types';
 
 
 import './styles.scss';
 import Upload from '../Upload';
 import { connect } from 'react-redux';
+import { faEdit, faTrashAlt } from '@fortawesome/free-regular-svg-icons';
 
 type propsClothes = {
-  idCollection?: string;
+  idCollection: string;
   clothes: Array<clothingType>;
   addClothing: (form: FormData) => (dispatch: Dispatch<AnyAction>) => void;
+  deleteClothing: (idC:string, idc:string) => (dispatch: Dispatch<AnyAction>) => void;
 }
 
 function Clothes(props: propsClothes) {
@@ -185,17 +187,28 @@ function Clothes(props: propsClothes) {
   }
 
   const renderClothing = () => {
+    const { idCollection, deleteClothing } = props
     return props.clothes.map((clothing, index) => {
       return (
         <section key={index} className={`clothing ${index % 2 === 0 ?
           'par' : 'impar'}`}>
-          <img src={clothing.images[0]?.url} alt={clothing.images[0]?.name} />
           <div className="infos">
-            <h1>{clothing.name}</h1>
-            <p>Cor: {clothing.color}</p>
-            <p>Tipo: {clothing.type}</p>
-            <p>Tamanho: {clothing.size}</p>
-            <p>Quantidade: {clothing.amount}</p>
+            <img src={clothing.images[0]?.url} alt={clothing.images[0]?.name} />
+            <div className="text">
+              <h1>{clothing.name}</h1>
+              <p>Cor: {clothing.color}</p>
+              <p>Tipo: {clothing.type}</p>
+              <p>Tamanho: {clothing.size}</p>
+              <p>Quantidade: {clothing.amount}</p>
+            </div>
+          </div>
+          <div className="buttons">
+            <button>
+              <FontAwesomeIcon icon={faEdit} /> 
+            </button>
+            <button  onClick={() => deleteClothing(idCollection, clothing._id)}>
+              <FontAwesomeIcon icon={faTrashAlt} />
+            </button>
           </div>
         </section>
       )
@@ -219,7 +232,8 @@ function Clothes(props: propsClothes) {
 }
 
 const mapDispatchToProps = (dispatch: Dispatch<AnyAction>) => bindActionCreators({
-  addClothing
+  addClothing,
+  deleteClothing
 }, dispatch)
 
 export default connect(null, mapDispatchToProps)(Clothes)

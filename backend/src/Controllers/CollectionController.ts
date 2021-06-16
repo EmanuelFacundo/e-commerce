@@ -109,7 +109,7 @@ class CollectionController {
 
   }
 
-  async updateACBI(req: Request, res: Response) { // update Amount Clothing By Id
+  async updateClothing(req: Request, res: Response) { // update Clothing
     const collectionBody = req.body
 
     try {
@@ -175,12 +175,12 @@ class CollectionController {
   async deleteClothing(req: Request, res: Response) {
 
     try {
-      const { idClothing, idCollection } = req.body
-
-      let collection = await collections.findById(idCollection)
+      const { idC, idc } = req.query // idC = (Id of collection) / idc =(Id of clothing)
+      console.log(req.query)
+      let collection = await collections.findById(idC)
 
       collection.clothes = collection.clothes.filter(clothing => {
-        if (clothing._id == idClothing) {
+        if (clothing._id == idc) {
           clothing.images.filter(image => {
             if (process.env.STORAGE_TYPE == "s3") {
               const s3 = new aws.S3()
@@ -203,11 +203,30 @@ class CollectionController {
         }
       })
 
-      await collections.updateOne({ _id: idCollection }, { clothes: collection.clothes })
+      await collections.updateOne({ _id: idC }, { clothes: collection.clothes })
+        .then(() => {
+          collections.find()
+            .exec()
+            .then(collection => {
+              return res.status(200).json({
+                message: "Roupa removida com sucesso!",
+                collections: collection
+              })
+            })
+            .catch(err => {
+              return res.status(500).json({
+                message: err.message,
+                err
+              })
+            })
+        })
+        .catch(err => {
+          return res.status(500).json({
+            message: err.message,
+            err
+          })
+        })
 
-      return res.status(200).json({
-        message: "Roupa removida com sucesso!"
-      })
     } catch (error) {
       return res.status(500).json({
         message: error.message
