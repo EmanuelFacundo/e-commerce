@@ -58,8 +58,6 @@ class Stock extends React.Component<statePropsType, collectionsType> {
     this.props.addCollection(this.newCollection)
     this.newCollection.name = ''
     this.newC = !this.newC
-    this.props.showCollections()
-    this.forceUpdate()
   }
 
   render() {

@@ -25,7 +25,7 @@ export function addCollection(collection: { name: string }) {
     Axios.post(`${DB}/collection/createCollection`, collection)
       .then(resp => {
         dispatch({
-          type: 'ADD_COLLECTION',
+          type: 'SHOW_COLLECTIONS',
           payload: resp.data
         })
       })
@@ -37,10 +37,10 @@ export function addCollection(collection: { name: string }) {
 
 export function deleteCollection(_id: string) {
   return (dispatch: Dispatch<AnyAction>) => {
-    Axios.put(`${DB}/collection/deleteCollection`, { _id })
+    Axios.delete(`${DB}/collection/deleteCollection/${_id}`)
       .then(resp => {
         dispatch({
-          type: 'DELETE_COLLECTION',
+          type: 'SHOW_COLLECTIONS',
           payload: resp.data
         })
       })
@@ -66,3 +66,5 @@ export function addClothing(form: FormData) {
       })
   }
 }
+
+// export function deleteClothing

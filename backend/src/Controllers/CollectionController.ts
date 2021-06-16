@@ -26,9 +26,13 @@ class CollectionController {
 
     await collections.insertMany(collection)
       .then(_ => {
-        return res.status(200).json({
-          message: "Coleção adicionada com sucesso!"
-        })
+        collections.find()
+          .exec()
+          .then(collection => {
+            return res.status(200).json({
+              collections: collection
+            })
+          })
       })
       .catch(err => {
         return res.status(500).json({
@@ -39,7 +43,7 @@ class CollectionController {
   }
 
   async deleteById(req: Request, res: Response) {
-    const _id = req.body
+    const { _id } = req.params
 
     try {
       const collection = await collections.findById(_id)
@@ -64,10 +68,13 @@ class CollectionController {
 
       await collections.remove({ _id })
         .then(_ => {
-          return res.status(200).json({
-            message: "Excluída com sucesso!",
-            collections
-          })
+          collections.find()
+            .exec()
+            .then(collection => {
+              return res.status(200).json({
+                collections: collection
+              })
+            })
         })
         .catch(err => {
           return res.status(500).json({
