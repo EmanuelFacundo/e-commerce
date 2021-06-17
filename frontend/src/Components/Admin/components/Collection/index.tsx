@@ -1,40 +1,69 @@
-import { faTrashAlt } from "@fortawesome/free-solid-svg-icons";
+import { faCheck, faEdit, faTimes, faTrashAlt } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useState } from "react";
-import { useEffect } from "react";
 import { connect } from "react-redux";
 import { Dispatch, AnyAction, bindActionCreators } from "redux";
 
 import Clothes from "../Clothes";
-import { deleteCollection, showCollections } from "../Stock/reducerStock/action";
+import { deleteCollection, editNameCollection } from "../Stock/reducerStock/action";
 import { collectionType } from "../Stock/reducerStock/types";
 
 type propsCollection = {
   collection: collectionType
   deleteCollection: (_id: string) => (dispatch: Dispatch<AnyAction>) => void;
-  showCollections: () => (dispatch: Dispatch<AnyAction>) => void;
+  editNameCollection: (idCollection: string, name: string) => 
+    (dispatch: Dispatch<AnyAction>) => void;
 }
 
 function Collection(props: propsCollection) {
 
-  const {collection, deleteCollection, showCollections} = props
-  const [toggleDeleted, setToggleDeleted] = useState(false)
-  useEffect(() => {
-    showCollections()
-  },[toggleDeleted,showCollections]);
+  const { collection, deleteCollection, editNameCollection } = props
+  const [editName, setEditName] = useState(false)
+  const [nameCollection, setNameCollection] = useState(collection.name)
+
+
   return (
     <div className="collections">
       <div className="menuTitle2">
         <div className="title2">
-          <h2>{collection.name}</h2>
+          {editName ?
+            <input
+              type="text"
+              value={nameCollection}
+              onChange={(e) => setNameCollection(e.target.value)}
+              autoFocus
+            />
+            :
+            <h2>{collection.name}</h2>
+          }
           <span></span>
         </div>
-        <button onClick={() => {
-          setToggleDeleted(!toggleDeleted)
-          deleteCollection(collection._id)
-        }}>
-          <FontAwesomeIcon icon={faTrashAlt} />
-        </button>
+        <div className="buttons">
+          {editName ?
+            <>
+              <button className="check" onClick={() => {
+                editNameCollection(collection._id, nameCollection)
+                setEditName(!editName)
+              }}>
+                <FontAwesomeIcon icon={faCheck} />
+              </button>
+              <button onClick={() => setEditName(!editName)}>
+                <FontAwesomeIcon icon={faTimes} />
+              </button>
+            </>
+            :
+            <>
+              <button onClick={() => setEditName(!editName)}>
+                <FontAwesomeIcon icon={faEdit} />
+              </button>
+              <button onClick={() => {
+                deleteCollection(collection._id)
+              }}>
+                <FontAwesomeIcon icon={faTrashAlt} />
+              </button>
+            </>
+          }
+        </div>
       </div>
       <Clothes idCollection={collection._id} clothes={collection.clothes} />
     </div>
@@ -43,7 +72,7 @@ function Collection(props: propsCollection) {
 
 const mapDispatchToProps = (dispatch: Dispatch<AnyAction>) => bindActionCreators({
   deleteCollection,
-  showCollections
+  editNameCollection
 }, dispatch)
 
 export default connect(null, mapDispatchToProps)(Collection)

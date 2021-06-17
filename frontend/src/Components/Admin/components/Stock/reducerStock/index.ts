@@ -28,10 +28,7 @@ export default function reducerStock(state:collectionsType = INITIAL_STATE, acti
   switch (action.type) {
     case 'SHOW_COLLECTIONS': 
       return {...state, collections: action.payload.collections}
-
-    case 'ADD_CLOTHING':
-    case 'ADD_COLLECTION':     
-    case 'DELETE_COLLECTION':
+    
     default: 
       return state
   }
