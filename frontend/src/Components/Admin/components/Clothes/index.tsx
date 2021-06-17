@@ -1,22 +1,21 @@
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faAngleDoubleLeft, faAngleDoubleRight, faPlus, faTimes } from '@fortawesome/free-solid-svg-icons'
 import { useState } from 'react';
 import { Dispatch, AnyAction, bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
 
-import { addClothing, deleteClothing } from '../Stock/reducerStock/action';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faAngleDoubleLeft, faAngleDoubleRight, faPlus, faTimes } from '@fortawesome/free-solid-svg-icons'
+
+import Upload from '../Upload';
+import Clothing from '../Clothing';
+import { addClothing } from '../Stock/reducerStock/action';
 import { clothingType } from '../Stock/reducerStock/types';
 
-
 import './styles.scss';
-import Upload from '../Upload';
-import { connect } from 'react-redux';
-import { faEdit, faTrashAlt } from '@fortawesome/free-regular-svg-icons';
 
 type propsClothes = {
   idCollection: string;
   clothes: Array<clothingType>;
   addClothing: (form: FormData) => (dispatch: Dispatch<AnyAction>) => void;
-  deleteClothing: (idC:string, idc:string) => (dispatch: Dispatch<AnyAction>) => void;
 }
 
 function Clothes(props: propsClothes) {
@@ -49,7 +48,6 @@ function Clothes(props: propsClothes) {
   const files: Array<File> = []
   let [uploadedImages, setUploadedImages] = useState(files)
   const [uploaded, setUploaded] = useState(false)
-  const [reset, setReset] = useState(false)
 
   if (name !== '' && description !== '' && color !== '' && uploaded &&
     type !== '' && amount !== 0 && size !== '' && disabledAdd) {
@@ -169,7 +167,6 @@ function Clothes(props: propsClothes) {
             </div>
             <div className="buttons">
               <button className="add" disabled={disabledAdd} onClick={() => {
-                setReset(!reset)
                 onClickAddClothing()
               }}>
                 <FontAwesomeIcon icon={faPlus} />
@@ -187,30 +184,14 @@ function Clothes(props: propsClothes) {
   }
 
   const renderClothing = () => {
-    const { idCollection, deleteClothing } = props
+    const { idCollection } = props
     return props.clothes.map((clothing, index) => {
       return (
-        <section key={index} className={`clothing ${index % 2 === 0 ?
-          'par' : 'impar'}`}>
-          <div className="infos">
-            <img src={clothing.images[0]?.url} alt={clothing.images[0]?.name} />
-            <div className="text">
-              <h1>{clothing.name}</h1>
-              <p>Cor: {clothing.color}</p>
-              <p>Tipo: {clothing.type}</p>
-              <p>Tamanho: {clothing.size}</p>
-              <p>Quantidade: {clothing.amount}</p>
-            </div>
-          </div>
-          <div className="buttons">
-            <button>
-              <FontAwesomeIcon icon={faEdit} /> 
-            </button>
-            <button  onClick={() => deleteClothing(idCollection, clothing._id)}>
-              <FontAwesomeIcon icon={faTrashAlt} />
-            </button>
-          </div>
-        </section>
+        <Clothing 
+          index={index} 
+          clothing={clothing} 
+          idCollection={idCollection} 
+        />
       )
     })
   }
@@ -232,8 +213,7 @@ function Clothes(props: propsClothes) {
 }
 
 const mapDispatchToProps = (dispatch: Dispatch<AnyAction>) => bindActionCreators({
-  addClothing,
-  deleteClothing
+  addClothing
 }, dispatch)
 
 export default connect(null, mapDispatchToProps)(Clothes)
