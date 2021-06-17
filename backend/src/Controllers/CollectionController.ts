@@ -91,15 +91,35 @@ class CollectionController {
     }
   }
 
-  async updateNameById(req: Request, res: Response) {
-    const collection = req.body
+  async updateNameById(req: Request, res: Response) { // Update name Collection
+    const { _id, name } = req.body
 
     try {
-      const up = await collections.updateOne({ _id: collection._id }, { name: collection.name })
+      await collections.updateOne({ _id }, { name })
+        .then(() => {
+          collections.find()
+            .exec()
+            .then(collections => {
+              return res.status(200).json({
+                collections,
+                message: "Alterada com Sucesso!"
+              })
+            })
+            .catch(err => {
+              return res.status(500).json({
+                message: err.message,
+                err
+              })
+            })
+        })
+        .catch(err => {
+          return res.status(500).json({
+            message: err.message,
+            err
+          })
+        })
 
-      return res.status(200).json({
-        message: "Alterada com Sucesso!"
-      })
+
     } catch (err) {
       return res.status(500).json({
         message: err.message,
@@ -110,20 +130,32 @@ class CollectionController {
   }
 
   async updateClothing(req: Request, res: Response) { // update Clothing
-    const collectionBody = req.body
+    const { idCollection, clothes } = req.body
 
     try {
-      const up = await collections
-        .updateOne({ _id: collectionBody.idCollection }, { clothes: collectionBody.clothes })
-
-      if (up) {
-        return res.status(200).json({
-          message: "Alterada com Sucesso!"
+      await collections.updateOne({ _id: idCollection }, { clothes: clothes })
+        .then(() => {
+          collections.find()
+            .exec()
+            .then(collections => {
+              return res.status(200).json({
+                collections,
+                message: "Alterada com sucesso!"
+              })
+            })
+            .catch(err => {
+              return res.status(500).json({
+                message: err.message,
+                err
+              })
+            })
         })
-      }
-      return res.status(200).json({
-        message: "Coleção nula"
-      })
+        .catch(err => {
+          return res.status(500).json({
+            message: err.message,
+            err
+          })
+        })
 
     } catch (err) {
       return res.status(500).json({
@@ -156,9 +188,9 @@ class CollectionController {
 
       collections.find()
         .exec()
-        .then(collection => {
+        .then(collections => {
           return res.status(200).json({
-            collections: collection
+            collections
           })
         })
 
@@ -207,10 +239,10 @@ class CollectionController {
         .then(() => {
           collections.find()
             .exec()
-            .then(collection => {
+            .then(collections => {
               return res.status(200).json({
                 message: "Roupa removida com sucesso!",
-                collections: collection
+                collections
               })
             })
             .catch(err => {
