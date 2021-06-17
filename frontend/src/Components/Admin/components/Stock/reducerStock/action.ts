@@ -103,7 +103,7 @@ export function deleteClothing(idC: string, idc: string) {
 export function editClothing(clothing: clothingType, idCollection: string){
 
   return (dispatch: Dispatch<AnyAction>) => {
-    Axios.put(`${DB}/collection/updateClothing`, { idCollection, clothing})
+    Axios.put(`${DB}/collection/updateClothing`, { idCollection, clothing })
       .then(resp => {
         dispatch({
           type: 'SHOW_COLLECTIONS',

@@ -130,10 +130,21 @@ class CollectionController {
   }
 
   async updateClothing(req: Request, res: Response) { // update Clothing
-    const { idCollection, clothes } = req.body
-
+    
     try {
-      await collections.updateOne({ _id: idCollection }, { clothes: clothes })
+      const { idCollection, clothing } = req.body
+
+      const collection = await collections.findById(idCollection)
+      const newClothes = collection.clothes.map(oldClothing => {
+        if (oldClothing._id == clothing._id) {
+          console.log(clothing.name)
+          return clothing
+        }
+
+        return oldClothing
+      })
+
+      await collections.updateOne({ _id: idCollection }, { clothes: newClothes })
         .then(() => {
           collections.find()
             .exec()
