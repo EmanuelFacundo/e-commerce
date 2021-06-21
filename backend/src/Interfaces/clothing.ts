@@ -3,9 +3,11 @@ import image from './image';
 
 export default interface clothing  extends Document {
   name: string;
-  images: Array<image>;
   description: string;
-  color: string;
+  colors: Array<{
+    color: string;
+    images: Array<image>;
+  }>;
   type: string;
   amount: number;
   size: string;
