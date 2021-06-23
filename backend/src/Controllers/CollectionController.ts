@@ -49,20 +49,22 @@ class CollectionController {
       const collection = await collections.findById(_id)
 
       collection?.clothes.filter(clothing => { // Deleting all images
-        clothing?.images.filter(image => {
-          if (process.env.STORAGE_TYPE == "s3") {
-            const s3 = new aws.S3()
-            s3.deleteObject({
-              Bucket: process.env.AWS_BUCKET,
-              Key: image.key.toString()
-            }).promise()
-          } else {
-            fs.unlink(
-              path.resolve(__dirname, "..", "..", "tmp", "uploads", image.key.toString()),
-              () => { }
-            )
-          }
-        })
+        clothing?.colors.filter(color => {
+          color.images.filter(image => {
+            if (process.env.STORAGE_TYPE == "s3") {
+              const s3 = new aws.S3()
+              s3.deleteObject({
+                Bucket: process.env.AWS_BUCKET,
+                Key: image.key.toString()
+              }).promise()
+            } else {
+              fs.unlink(
+                path.resolve(__dirname, "..", "..", "tmp", "uploads", image.key.toString()),
+                () => { }
+              )
+            }
+          })
+        }) 
       })
 
 
@@ -189,8 +191,8 @@ class CollectionController {
           size: file.size,
           key: file.key ? file.key : file.filename,
           url: file.location || `${process.env.APP_URL}/files/${file.filename}`,
-        }
-        clothing.images.push(image)
+        } 
+        clothing.colors.filter(color => color.images.push(image)) 
       })
 
       const collection = await collections.findById(idCollection)
@@ -224,21 +226,22 @@ class CollectionController {
 
       collection.clothes = collection.clothes.filter(clothing => {
         if (clothing._id == idc) {
-          clothing.images.filter(image => {
-            if (process.env.STORAGE_TYPE == "s3") {
-              const s3 = new aws.S3()
-              s3.deleteObject({
-                Bucket: process.env.AWS_BUCKET,
-                Key: image.key.toString()
-              }).promise()
-            } else {
-              fs.unlink(
-                path.resolve(__dirname, "..", "..", "tmp", "uploads", image.key.toString()),
-                () => { }
-              )
-            }
-
-          })
+          clothing.colors.filter(color => {
+            color.images.filter(image => {
+              if (process.env.STORAGE_TYPE == "s3") {
+                const s3 = new aws.S3()
+                s3.deleteObject({
+                  Bucket: process.env.AWS_BUCKET,
+                  Key: image.key.toString()
+                }).promise()
+              } else {
+                fs.unlink(
+                  path.resolve(__dirname, "..", "..", "tmp", "uploads", image.key.toString()),
+                  () => { }
+                )
+              }
+            })
+          }) 
 
 
         } else {
