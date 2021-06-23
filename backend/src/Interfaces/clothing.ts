@@ -6,9 +6,9 @@ export default interface clothing  extends Document {
   description: string;
   colors: Array<{
     color: string;
+    amount: number;
     images: Array<image>;
   }>;
   type: string;
-  amount: number;
   size: string;
 }

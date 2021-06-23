@@ -2,7 +2,8 @@ node_modules
 *.logs
 .env
 .env.*
-tmp/uplodas/*.jpeg
-tmp/uplodas/*.pjpeg
-tmp/uplodas/*.png
-tmp/uplodas/*.gif
+backend/tmp/uploads/*.jpg
+backend/tmp/uploads/*.jpeg
+backend/tmp/uploads/*.pjpeg
+backend/tmp/uploads/*.png
+backend/tmp/uploads/*.gif

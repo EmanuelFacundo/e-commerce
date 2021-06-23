@@ -10,6 +10,7 @@ import config from './config'
 import userRouter from './Routes/UsersRoutes'
 import collectionRouter from './Routes/CollectionRoutes'
 import process from 'process';
+import clothingRoutes from './Routes/ClothingRoutes';
 
 dotenv.config()
 
@@ -30,7 +31,8 @@ app.use(express.urlencoded({ extended: true }))
 app.use(cors())
 
 app.use('/users', userRouter)
-app.use('/collection', collectionRouter)
+app.use('/collections', collectionRouter)
+app.use('/clothes', clothingRoutes)
 app.use('/files', 
   express.static(path.resolve(__dirname, "..", "tmp", "uploads"))
 )
