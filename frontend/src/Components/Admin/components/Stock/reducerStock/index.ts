@@ -8,15 +8,17 @@ const INITIAL_STATE = {
     clothes: [{
       _id: '',
       name: '',
-      images: [{
-        name: '',
-        size: 0,
-        key: '',
-        url: '',
-        createdAt: '',
-      }],
       description: '',
-      color: '',
+      colors: {
+        color: '',
+        images: [{
+          name: '',
+          size: 0,
+          key: '',
+          url: '',
+          createdAt: '',
+        }]
+      },
       type: '',
       amount: 0,
       size: ''

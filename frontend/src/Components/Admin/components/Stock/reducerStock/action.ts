@@ -8,7 +8,7 @@ const DB = process.env.REACT_APP_DATABASE_LUSS
 export function showCollections() {
 
   return (dispatch: Dispatch<AnyAction>) => {
-    Axios.get(`${DB}/collection/showCollections`)
+    Axios.get(`${DB}/collections/showCollections`)
       .then(resp => {
         dispatch({
           type: 'SHOW_COLLECTIONS',
@@ -23,7 +23,7 @@ export function showCollections() {
 
 export function addCollection(collection: { name: string }) {
   return (dispatch: Dispatch<AnyAction>) => {
-    Axios.post(`${DB}/collection/createCollection`, collection)
+    Axios.post(`${DB}/collections/createCollection`, collection)
       .then(resp => {
         dispatch({
           type: 'SHOW_COLLECTIONS',
@@ -38,7 +38,7 @@ export function addCollection(collection: { name: string }) {
 
 export function deleteCollection(_id: string) {
   return (dispatch: Dispatch<AnyAction>) => {
-    Axios.delete(`${DB}/collection/deleteCollection/${_id}`)
+    Axios.delete(`${DB}/collections/deleteCollection/${_id}`)
       .then(resp => {
         dispatch({
           type: 'SHOW_COLLECTIONS',
@@ -53,7 +53,7 @@ export function deleteCollection(_id: string) {
 
 export function editNameCollection(_id: string, name: string) {
   return (dispatch: Dispatch<AnyAction>) => {
-    Axios.put(`${DB}/collection/updateNameCollection`, { _id, name })
+    Axios.put(`${DB}/collections/updateNameCollection`, { _id, name })
       .then(resp => {
         dispatch({
           type: 'SHOW_COLLECTIONS',
@@ -69,7 +69,7 @@ export function editNameCollection(_id: string, name: string) {
 export function addClothing(form: FormData) {
 
   return (dispatch: Dispatch<AnyAction>) => {
-    Axios.put(`${DB}/collection/addClothing`, form)
+    Axios.put(`${DB}/collections/addClothing`, form)
       .then(resp => {
         dispatch({
           type: 'SHOW_COLLECTIONS',
@@ -86,7 +86,7 @@ export function addClothing(form: FormData) {
 export function deleteClothing(idC: string, idc: string) {
 
   return (dispatch: Dispatch<AnyAction>) => {
-    Axios.delete(`${DB}/collection/deleteClothing?idC=${idC}&idc=${idc}`)
+    Axios.delete(`${DB}/collections/deleteClothing?idC=${idC}&idc=${idc}`)
       .then(resp => {
         dispatch({
           type: 'SHOW_COLLECTIONS',
@@ -103,7 +103,7 @@ export function deleteClothing(idC: string, idc: string) {
 export function editClothing(clothing: clothingType, idCollection: string){
 
   return (dispatch: Dispatch<AnyAction>) => {
-    Axios.put(`${DB}/collection/updateClothing`, { idCollection, clothing })
+    Axios.put(`${DB}/collections/updateClothing`, { idCollection, clothing })
       .then(resp => {
         dispatch({
           type: 'SHOW_COLLECTIONS',

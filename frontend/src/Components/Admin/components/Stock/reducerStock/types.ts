@@ -17,9 +17,11 @@ export type collectionType = {
 export type clothingType = {
   _id: string;
   name: string;
-  images: Array<image>;
   description: string;
-  color: string;
+  colors: {
+    color: string;
+    images: Array<image>;
+  };
   type: string;
   amount: number;
   size: string;
