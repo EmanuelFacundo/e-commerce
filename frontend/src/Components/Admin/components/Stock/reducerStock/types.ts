@@ -18,12 +18,12 @@ export type clothingType = {
   _id: string;
   name: string;
   description: string;
-  colors: {
+  colors: Array<{
     color: string;
+    amount: number;
     images: Array<image>;
-  };
+  }>;
   type: string;
-  amount: number;
   size: string;
 }
 

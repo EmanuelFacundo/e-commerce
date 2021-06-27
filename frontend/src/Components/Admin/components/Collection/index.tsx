@@ -21,7 +21,6 @@ function Collection(props: propsCollection) {
   const [editName, setEditName] = useState(false)
   const [nameCollection, setNameCollection] = useState(collection.name)
 
-
   return (
     <div className="collections">
       <div className="menuTitle2">

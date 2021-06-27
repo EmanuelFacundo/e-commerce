@@ -187,7 +187,7 @@ function Clothes(props: propsClothes) {
     const { idCollection } = props
     return props.clothes.map((clothing, index) => {
       return (
-        <Clothing 
+        <Clothing key={index}
           index={index} 
           clothing={clothing} 
           idCollection={idCollection} 

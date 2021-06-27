@@ -9,8 +9,9 @@ const INITIAL_STATE = {
       _id: '',
       name: '',
       description: '',
-      colors: {
+      colors: [{
         color: '',
+        amount: 0,
         images: [{
           name: '',
           size: 0,
@@ -18,9 +19,8 @@ const INITIAL_STATE = {
           url: '',
           createdAt: '',
         }]
-      },
+      }],
       type: '',
-      amount: 0,
       size: ''
     }]
   }]
