@@ -7,13 +7,14 @@ import thunk from 'redux-thunk'
 import App from './App';
 import rootReducer from './Reduce'
 
-import './styles.scss'
+import { GlobalStyle } from './styles';
 
 const store = applyMiddleware(thunk, promise)(createStore)(rootReducer)
 
 ReactDOM.render(
   <Provider store={store}>
     <App/>
+    <GlobalStyle/>
   </Provider>,
   document.getElementById('root')
 );
